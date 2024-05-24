@@ -1,0 +1,37 @@
+/* Carrito */
+.pa-cart-box {
+    padding: 30px;
+    background-color: #ececea;
+    text-align: end;
+}
+
+.pa-cart-box table,
+.pa-bill-detail table {
+    color: #000;
+    width: 100%;
+}
+
+
+.pa-cart-box table th,
+.pa-bill-detail table th {
+    background: #24386d;
+    color: #fff;
+    padding-top: 20px;
+}
+
+
+.pa-cart-box table th:first-child, .pa-bill-detail table th:first-child {
+    border-radius: 10px 0px 0px 0px;
+}
+
+.pa-cart-box table th:last-child, .pa-bill-detail table th:last-child {
+    border-radius: 0px 10px 0px 0px;
+    border: none;
+}
+
+.pa-cart-box table th {
+    border-right: 2px solid #eee;
+    text-align: center;
+    align-items: center;
+}
+

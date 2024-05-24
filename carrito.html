@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="carrito.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Carrito</title>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <p class="logo-texto">Impresiones3D</p>
+            <a href="./index.html">
+                <img class="logo" src="./Logo.jpg" alt="">
+            </a>
+        </div>
+        <div style="text-align: center;" id="resultado">
+            <img style="max-width: 40px;" src="./img/clima.png" alt="">
+        </div>
+        <ul class="nav-links">
+            <li><a href="./index.html">Inicio</a></li>
+            <li><a href="./productos.html">Productos</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#about">Acerca de</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+            <li><a href="./carrito.html" style="color: white;" class="nav-link" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a id="btn-desplegable" style="color: white;" class="nav-link dropdown-toggle" href="#"
+                    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 36 36">
+                        <path fill="currentColor"
+                            d="M18 17a7 7 0 1 0-7-7a7 7 0 0 0 7 7m0-12a5 5 0 1 1-5 5a5 5 0 0 1 5-5"
+                            class="clr-i-outline clr-i-outline-path-1" />
+                        <path fill="currentColor"
+                            d="M30.47 24.37a17.16 17.16 0 0 0-24.93 0A2 2 0 0 0 5 25.74V31a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2v-5.26a2 2 0 0 0-.53-1.37M29 31H7v-5.27a15.17 15.17 0 0 1 22 0Z"
+                            class="clr-i-outline clr-i-outline-path-2" />
+                        <path fill="none" d="M0 0h36v36H0z" />
+                    </svg>
+                </a>
+                <ul id="desplegable" style="display: none;">
+                    <li><a class="" href="./iniciar-sesion.html">Iniciar Sesión</a></li>
+                    <li><a class="" href="#">Cerrar Cuenta</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <main>
+        <div class="pa-cart spacer-top spacer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="pa-cart-box">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Tipo</th>
+                                        <th>Modalidad</th>
+                                        <th>Precio</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cart-body">
+                                    <tr>
+                                        <td colspan="6">
+                                            <center style="margin: 20px;">
+                                                <p style="font-size: 20px;">No hay nada en el carrito todavía </p>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table style="margin-top: 30px;">
+                                <tr>
+                                    <td colspan="4" class="pa-cart-total">
+                                        <p>Subtotal:</p>
+                                    </td>
+                                    <td class="pa-cart-total-price">
+                                        <p id="subTotal" style="font-size: 20px;">0,00 <small>ARS</small></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="pa-cart-total">
+                                        <p>Recargo por servicio de MercadoPago:</p>
+                                    </td>
+                                    <td class="pa-cart-total-price">
+                                        <p id="pagoMp" style="font-size: 20px;"> 0,00 <small>ARS</small></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="pa-cart-total">
+                                        <p>Total:</p>
+                                    </td>
+                                    <td class="pa-cart-total-price">
+                                        <p id="total" style="font-size: 20px;">0,00 <small>ARS</small></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><a style="margin-top: 30px; color: white;" href="./index.html"
+                                            class="pa-btn pa-btn--full-width btn btn-warning"
+                                            media="screen and (max-width: 767px)">Volver</a>
+                                    </td>
+                                    <td colspan="2" class="pa-cart-update">
+                                        <button class="btn btn-danger" onclick="pagar()" style="margin-top: 30px;"
+                                            class="pa-btn bg-danger text-white pa-btn--fullLog-width"
+                                            media="screen and (max-width: 767px)">Pagar</button>
+                                        <a style="display: none;" style="margin-top: 30px;"
+                                            href="http://localhost:8080/iniciar-sesion"
+                                            media="screen and (max-width: 767px)">Loguearse </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+<script>
+    let subTotal = 0;
+    const subTotalHtml = document.querySelector("#subTotal")
+
+    let pagoMp = 0
+    const pagoMpHtml = document.querySelector("#pagoMp")
+
+    const totalHtml = document.querySelector("#total")
+
+
+
+    function cargarCarrito() {
+        const cartBody = document.getElementById('cart-body');
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        console.log("CarritoStorage: ", carrito)
+        cartBody.innerHTML = ''; // Limpiar el contenido existente
+
+        carrito.forEach(item => {
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td style="text-align: center"><img style="max-width: 150px;" src="${item.imagen}" alt="${item.nombre}"></td>
+                <td style="font-size: small; text-align: center; margin-right: 10px;" >${item.nombre}</td>
+                <td style="font-size: small;">carrera</td>
+                <td>A Distancia</td>
+                <td>$ ${item.precio}</td>
+                <td>
+                    <button onclick="eliminarFila(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                                <title>ELIMINAR</title>
+                                <path fill="red"
+                                    d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12l1.41 1.41L13.41 14l2.12 2.12l-1.41 1.41L12 15.41l-2.12 2.12l-1.41-1.41L10.59 14zM15.5 4l-1-1h-5l-1 1H5v2h14V4z" />
+                            </svg>
+                    </button>
+                </td>
+            `;
+            cartBody.appendChild(row);
+
+            subTotal = parseInt(subTotal) + parseInt(item.precio)
+
+            pagoMp = (subTotal * 0.08)
+        });
+
+        console.log(subTotal)
+        subTotalHtml.innerText = `$ ${subTotal}`
+        pagoMpHtml.innerText = `$ ${pagoMp}`
+        totalHtml.innerText = `$ ${subTotal + pagoMp}`
+
+
+        // Si el carrito está vacío, mostrar un mensaje
+        if (carrito.length === 0) {
+            const emptyRow = document.createElement('tr');
+            emptyRow.innerHTML = `
+                <td colspan="6" style="text-align: center;">
+                    <p style="font-size: 20px;">No hay nada en el carrito todavía</p>
+                </td>
+            `;
+            cartBody.appendChild(emptyRow);
+        }
+    }
+
+    // Función para eliminar un producto del carrito
+    function eliminarDelCarrito(nombreProducto) {
+        const index = carrito.findIndex(item => item.nombre === nombreProducto);
+        if (index > -1) {
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            cargarCarrito(); // Recargar el carrito después de eliminar el producto
+        }
+    }
+
+    cargarCarrito();
+
+
+    function eliminarFila(index) {
+        let datos = JSON.parse(localStorage.getItem('carrito'));
+        datos.splice(index, 1); // Eliminar el elemento del array
+        localStorage.setItem('carrito', JSON.stringify(datos)); // Actualizar localStorage
+        cargarCarrito(); // Recargar la tabla
+        pagoMpHtml.innerText = 0
+        subTotalHtml.innerText = 0
+        totalHtml.innerText = 0
+
+    }
+
+
+
+    function pagar() {
+        console.log("Pagar")
+        localStorage.setItem('carrito', JSON.stringify(""));
+        cargarCarrito();
+        pagoMpHtml.innerText = 0
+        subTotalHtml.innerText = 0
+        totalHtml.innerText = 0
+
+    }
+
+</script>
+
+<script src="./script.js"></script>
+
+</html>
