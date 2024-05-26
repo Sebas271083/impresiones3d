@@ -74,110 +74,186 @@ function generarTarjetas() {
         descripcion.textContent = producto.descripcion;
 
         const precio = document.createElement("p");
-        precio.id = "precioProducto"
+        precio.id = "precioProducto";
         precio.textContent = `Precio: ${producto.precio}`;
 
         const boton = document.createElement("button");
-        console.log("imagen", imagen.src)
-        boton.id = "btn-" + producto.id
+        boton.id = "btn-" + producto.id;
         boton.setAttribute("data-id", producto.id);
-
-        // addEventListener('click', () => agregarAlCarrito(imagen.src, titulo.textContent));
         boton.textContent = "Agregar al Carrito";
-        // Agregar elementos a la tarjeta de producto
+
+        const contenedorBotones = document.createElement("div");
+        contenedorBotones.id = "contenedor-btn" + producto.id;
+        contenedorBotones.style.display = "flex";
+        contenedorBotones.style.justifyContent = "center";
+        contenedorBotones.style.alignItems = "end";
+        contenedorBotones.style.display = "none";
+
+        const botonMas = document.createElement("button");
+        botonMas.classList.add("btn-mas");
+        botonMas.textContent = "+";
+        botonMas.style.height = "30px";
+        botonMas.style.marginTop = "20px";
+        botonMas.style.marginRight = "10px";
+
+        const cantidad = document.createElement("input");
+        cantidad.classList.add("cantidad");
+        cantidad.value = 0;
+        cantidad.style.width = "40px";
+        cantidad.style.height = "20px";
+        cantidad.style.textAlign = "center";
+
+        const botonMenos = document.createElement("button");
+        botonMenos.classList.add("btn-menos");
+        botonMenos.type = "button";
+        botonMenos.style.height = "30px";
+        botonMenos.style.marginTop = "20px";
+        botonMenos.style.marginLeft = "10px";
+        botonMenos.textContent = "-";
+
+        contenedorBotones.appendChild(botonMenos);
+        contenedorBotones.appendChild(cantidad);
+        contenedorBotones.appendChild(botonMas);
+
         cardContent.appendChild(titulo);
         cardContent.appendChild(descripcion);
         cardContent.appendChild(precio);
         cardContent.appendChild(boton);
+        cardContent.appendChild(contenedorBotones);
 
         card.appendChild(imagen);
         card.appendChild(cardContent);
 
-
-
-        if(cardContainer) {
+        if (cardContainer) {
             cardContainer.appendChild(card);
         }
     });
+
+    // Asignar eventos a los botones después de generarlos
+    setTimeout(() => {
+        document.querySelectorAll('.btn-menos').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cantidad = e.target.parentElement.querySelector('.cantidad');
+                if (cantidad.value > 0) {
+                    cantidad.value = parseInt(cantidad.value) - 1;
+                }
+            });
+        });
+
+        document.querySelectorAll('.btn-mas').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cantidad = e.target.parentElement.querySelector('.cantidad');
+                cantidad.value = parseInt(cantidad.value) + 1;
+            });
+        });
+
+        document.querySelectorAll('button[id^="btn-"]').forEach(boton => {
+            boton.addEventListener('click', function () {
+                agregarAlCarrito(this.getAttribute('data-id'));
+            });
+        });
+    }, 100);
 }
 
 // Llamar a la función para generar las tarjetas al cargar la página
 window.addEventListener('DOMContentLoaded', generarTarjetas);
 
+function agregarAlCarrito(productoId) {
+    const contenedorBotones = document.querySelector(`#contenedor-btn${productoId}`);
+    contenedorBotones.style.display = "flex";
+
+    const imgProducto = document.querySelector(`.imagenProducto${productoId}`);
+    const nombreProducto = document.querySelector(`.nombreProducto${productoId}`);
+    const btnAgregar = document.querySelector(`#btn-${productoId}`);
+
+    btnAgregar.textContent = "Producto Agregado";
+    btnAgregar.style.backgroundColor = "green";
+
+    const productoObj = {
+        imagen: imgProducto.src,
+        nombre: nombreProducto.textContent,
+        precio: "16000"
+    };
+
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.push(productoObj);
+
+    const contadorCarrito = document.querySelector("#contadorCarrito");
+    contadorCarrito.innerText = carrito.length;
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const currentUrl = "." + window.location.pathname;
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    navLinks.forEach(link => {
+        let linkCompleto = './impresiones3d' + link.getAttribute('href').replace(/^\./, '');
+        if (linkCompleto === currentUrl) {
+            link.classList.add('active');
+        }
+    });
+});
 
 function animarElementoOnScroll() {
     const elemento = document.querySelector('.content-servicios');
     const distanciaDesdeLaParteSuperior = elemento.getBoundingClientRect().top;
 
-    // Verifica si el elemento está visible en la ventana
     if (distanciaDesdeLaParteSuperior < window.innerHeight / 2) {
-        // Si el elemento está visible, agrega las clases de animación
         elemento.classList.add('animate__animated', 'animate__slideInUp');
-        // Agrega un pequeño retraso para asegurar que la animación se active
         setTimeout(() => {
             elemento.style.display = "flex";
-        }, 100); // Puedes ajustar este valor según sea necesario
+        }, 100);
     }
 }
 
-// Agrega un event listener al evento scroll
 window.addEventListener('scroll', animarElementoOnScroll);
 
 const container = document.querySelector('.container');
 const resultado = document.querySelector('#resultado');
 const formulario = document.querySelector('#formulario');
 
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Llamas a la función consultarApi con los valores de la ciudad y el país deseados
     consultarApi('ciudad autonoma de buenos aires', 'Argentina');
 });
 
-
 function consultarApi(ciudad, pais) {
-
     const appId = '4a82dce44d60f84db126afbe6d3fd1da';
-
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
 
     fetch(url)
         .then(respuesta => respuesta.json())
         .then(datos => {
             if (datos.cod === "404") {
-                mostarError('Ciudad no encontrada')
+                mostarError('Ciudad no encontrada');
                 return;
             }
-            console.log(datos)
-
-            //imprime la respuesta en el HTML
             mostrarClima(datos);
-        })
-
+        });
 }
 
-
 function mostrarClima(datos) {
-    console.log("mostrarClima")
-    const { name, main: { temp, temp_max, temp_min } } = datos
-    const centigrados = kelvinACentigrados(temp)
+    const { name, main: { temp, temp_max, temp_min } } = datos;
+    const centigrados = kelvinACentigrados(temp);
     const max = kelvinACentigrados(temp_max);
     const min = kelvinACentigrados(temp_min);
 
     const nombreCiudad = document.createElement('p');
-    nombreCiudad.textContent = `Clima en ${name}`
-    nombreCiudad.classList.add('font-bold', 'text-2xl')
+    nombreCiudad.textContent = `Clima en ${name}`;
+    nombreCiudad.classList.add('font-bold', 'text-2xl');
 
     const actual = document.createElement('p');
-    actual.innerHTML = `${centigrados} &#8451; `
-    actual.classList.add('font-bold', 'text-6xl')
+    actual.innerHTML = `${centigrados} &#8451; `;
+    actual.classList.add('font-bold', 'text-6xl');
 
     const tempMaxima = document.createElement('p');
-    tempMaxima.innerHTML = `Max: ${max} &#8451`
-    tempMaxima.classList.add('text-xl')
+    tempMaxima.innerHTML = `Max: ${max} &#8451`;
+    tempMaxima.classList.add('text-xl');
 
     const tempMinima = document.createElement('p');
-    tempMinima.innerHTML = `Min: ${min} &#8451`
-    tempMinima.classList.add('text-xl')
+    tempMinima.innerHTML = `Min: ${min} &#8451`;
+    tempMinima.classList.add('text-xl');
 
     const resultadoDiv = document.createElement('div');
     resultadoDiv.classList.add('text-center', 'text-white');
@@ -185,7 +261,6 @@ function mostrarClima(datos) {
     resultadoDiv.appendChild(actual);
     resultadoDiv.appendChild(tempMaxima);
     resultadoDiv.appendChild(tempMinima);
-
 
     resultado.appendChild(resultadoDiv);
 }
@@ -232,17 +307,45 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 100);
     
 
+    setTimeout(() => {
+    const btnMas = document.querySelector(`.btn-mas`)
+    const btnMenos = document.querySelector(`.btn-menos`)
+    console.log("btnMenos", btnMenos)
+    const cantidad = document.querySelector("#cantidad")
+    console.log("cantidad: ", cantidad)
+}, 100);
+
+
+
+
+    btnMenos.addEventListener('click', (e)=>{
+        e.preventDefault()
+        console.log("btn-menos", btnMenos)
+        if( cantidad.value == 0 ){
+            return
+        }
+        cantidad.value = cantidad - 1
+    } )
+
 
 
     function agregarAlCarrito(productoId) {
 
         let imgProducto;
         let nombreProducto
+        contenedorBotones = document.querySelector(`#contenedor-btn${productoId}`)
+        console.log("contenedorBotones", contenedorBotones)
+        contenedorBotones.style.display = "flex"
 
         imgProducto = document.querySelector(`.imagenProducto${productoId}`)
         console.log("imgCarrera", imgProducto.src)
         nombreProducto = document.querySelector(`.nombreProducto${productoId}`)
         console.log("nombreCarrera ", nombreProducto.textContent)
+        
+        const btnAgregar = document.querySelector(`#btn-${productoId}`)
+
+        btnAgregar.textContent = "Producto Agregado"
+        btnAgregar.style.backgroundColor = "green"
 
 
         const productoObj = {
