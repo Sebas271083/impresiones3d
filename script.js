@@ -316,8 +316,6 @@ document.addEventListener('DOMContentLoaded', function () {
 }, 100);
 
 
-
-
     btnMenos.addEventListener('click', (e)=>{
         e.preventDefault()
         console.log("btn-menos", btnMenos)
@@ -349,6 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         const productoObj = {
+            id: productoId,
             imagen: imgProducto.src,
             nombre: nombreProducto.textContent,
             precio: "16000"
@@ -356,20 +355,22 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
 
-
-
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        // Agregar el producto al carrito
-        carrito.push(productoObj);
-        console.log("producto:", productoObj)
-        console.log("Carrito", carrito)
+       
+        // Verificar si el producto ya está en el carrito
+        const productoExistente = carrito.find(producto => producto.id === productoId);
 
-        
-        contador = carrito.length;
-        contadorCarrito.innerText = contador
+        if (!productoExistente) {
+             // Agregar el producto al carrito
+            carrito.push(productoObj);
 
-        // Guardar el carrito actualizado en el localStorage
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+            contador = carrito.length;
+            contadorCarrito.innerText = contador
+    
+            // Guardar el carrito actualizado en el localStorage
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+        }
+      
     }
 
     // window.addEventListener('load', function () {
