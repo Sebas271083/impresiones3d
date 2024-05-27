@@ -53,7 +53,7 @@
                 </a>
                 <ul id="desplegable" style="display: none;">
                     <li><a class="" href="./iniciar-sesion.html">Iniciar Sesión</a></li>
-                    <li><a class="" href="#">Cerrar Cuenta</a></li>
+                    <!-- <li><a class="" href="#">Cerrar Cuenta</a></li> -->
                 </ul>
             </li>
         </ul>
@@ -80,15 +80,24 @@
                 <label for="message">Mensaje:</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
+
+            <div>
+                <label><input type="checkbox" id="cbox1" value="first_checkbox" />He leído los terminos y
+                    condiciones</label>
+            </div>
+
             <button type="submit">Enviar</button>
         </form>
     </div>
 
+    
+
     <footer>
         <div class="footer-content">
             <div class="footer-section about">
-                <h2>Sobre Nosotros</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.</p>
+                <h2>Donde encontrarnos</h2>
+                <p>Av. de La Patria 1520</p>
+                <p>Cdad de Bs.As.</p>
                 <div class="contact">
                     <span><i class="fas fa-phone"></i> 54-456-7890</span>
                     <span><i class="fas fa-envelope"></i> info@mail.com</span>
@@ -99,32 +108,15 @@
                     <a href="#"><img src="./img/instagram.ico" alt=""></a>
                 </div>
             </div>
-            <div class="footer-section links">
-                <h2>Enlaces Rápidos</h2>
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Productos</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-section contact-form">
-                <h2>Contacto</h2>
-                <form action="#" method="POST">
-                    <input type="email" name="email" class="text-input contact-input"
-                        placeholder="Tu Correo Electrónico">
-                    <textarea name="message" class="text-input contact-input" placeholder="Tu Mensaje"></textarea>
-                    <button type="submit" class="btn btn-big contact-btn">
-                        <i class="fas fa-envelope"></i>
-                        Enviar
-                    </button>
-                </form>
+            
             </div>
         </div>
         <div class="footer-bottom">
             &copy; 2024 Impresiones3D | Todos los derechos reservados
         </div>
     </footer>
+
+
 
     <script src="./script.js"></script>
 </body>
